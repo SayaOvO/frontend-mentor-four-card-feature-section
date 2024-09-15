@@ -1,0 +1,162 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: hsl(0, 78%, 62%);
+  --cyan: hsl(180, 62%, 55%);
+  --orange: hsl(34, 97%, 64%);
+  --blue: hsl(212, 86%, 64%);
+  --dark-blue: hsl(234, 12%, 34%);
+  --gray-blue: hsl(229, 6%, 66%);
+  --light-gray: hsl(0, 0%, 98%);
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--light-gray);
+  font-size: 15px;
+  margin-block: 85px 36px;
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 200;
+  color: var(--dark-blue);
+  margin-bottom: 1em;
+
+  & > strong {
+    font-weight: 600;
+  }
+}
+
+.subtitle {
+  max-width: 460px;
+  margin-inline: auto;
+  color: var(--gray-blue);
+}
+
+.container {
+  max-width: 1140px;
+  margin-inline: auto;
+}
+
+.cards {
+  margin-top: 42px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    ". builder ."
+    "supervisor builder calculator"
+    "supervisor karma calculator"
+    ". karma .";
+}
+
+.card {
+  padding: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
+
+  & > h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: var(--dark-blue);
+    font-weight: 600;
+  }
+
+  & > p {
+    margin-bottom: 48px;
+    color: var(--gray-blue);
+  }
+
+  & > img {
+    float: right;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+}
+
+.card.supervisor {
+  grid-area: supervisor;
+
+  &::before {
+    background-color: var(--cyan);
+  }
+}
+
+.card.builder {
+  grid-area: builder;
+
+  &::before {
+    background-color: var(--red);
+  }
+}
+
+.card.karma {
+  grid-area: karma;
+  &::before {
+    background-color: var(--orange);
+  }
+}
+
+.card.calculator {
+  grid-area: calculator;
+  &::before {
+    background-color: var(--blue);
+  }
+}
+
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "supervisor builder" "calculator karma";
+  }
+  body {
+    margin: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: "supervisor" "builder" "karma" "calculator";
+    gap: 18px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+  .subtitle {
+    font-size: 14px;
+    max-width: 320px;
+  }
+
+  body {
+    margin: 32px 16px;
+  }
+}
